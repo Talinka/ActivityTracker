@@ -1,0 +1,23 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Backend API for Exercise Planner",
+  "main": "dist/server.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "npm run build && node dist/server.js",
+    "start": "node dist/server.js",
+    "test": "npx tsc && node dist/tests/run-tests.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.2.1",
+    "helmet": "^8.1.0"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.6",
+    "@types/node": "^25.0.10",
+    "typescript": "^5.9.3"
+  }
+}
