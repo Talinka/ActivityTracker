@@ -3,9 +3,11 @@ import path from 'path';
 
 const dataDir = path.join(__dirname, 'data')
 env.EXERCIZE_TRACKER_DATA_DIR = dataDir;
+
 import { dataService } from '../services/data.service';
 import { activityService } from '../services/activity-service';
 import { statisticsService } from '../services/statistics-service';
+import { activityHistory } from './fixtures/activityHistory';
 
 function runTests(): void {
 	let testsPassed = 0;
@@ -35,7 +37,7 @@ function runTests(): void {
 		const suggestion1 = activityService.suggestActivity();
 		// Should start with first type (stretching), first id (12)
 		if (suggestion1.type !== 'stretching' || suggestion1.id !== 12) {
-			console.log(`  Expected: stretching/12, Got: ${suggestion1.type}/${suggestion1.id}`);
+			console.log(`	Expected: stretching/12, Got: ${suggestion1.type}/${suggestion1.id}`);
 			return false;
 		}
 
@@ -72,7 +74,7 @@ function runTests(): void {
 		}
 		// Should have marked the suggested activity
 		if (lastActivity.type !== suggestion.type || lastActivity.id !== suggestion.id) {
-			console.log(`  Expected marked: ${suggestion.type}/${suggestion.id}, Got: ${lastActivity.type}/${lastActivity.id}`);
+			console.log(`	Expected marked: ${suggestion.type}/${suggestion.id}, Got: ${lastActivity.type}/${lastActivity.id}`);
 			return false;
 		}
 
@@ -83,7 +85,7 @@ function runTests(): void {
 		// Get first suggestion (should be stretching, id 12)
 		const suggestion1 = activityService.suggestActivity();
 		if (suggestion1.type !== 'stretching' || suggestion1.id !== 12) {
-			console.log(`  Expected: stretching/12, Got: ${suggestion1.type}/${suggestion1.id}`);
+			console.log(`	Expected: stretching/12, Got: ${suggestion1.type}/${suggestion1.id}`);
 			return false;
 		}
 
@@ -92,7 +94,7 @@ function runTests(): void {
 		// Get second suggestion (should be next type: fitness, id 1)
 		const suggestion2 = activityService.suggestActivity();
 		if (suggestion2.type !== 'fitness' || suggestion2.id !== 1) {
-			console.log(`  Expected: fitness/1, Got: ${suggestion2.type}/${suggestion2.id}`);
+			console.log(`	Expected: fitness/1, Got: ${suggestion2.type}/${suggestion2.id}`);
 			return false;
 		}
 
@@ -101,37 +103,44 @@ function runTests(): void {
 		// Get third suggestion (should be back to first type: stretching, id 14)
 		const suggestion3 = activityService.suggestActivity();
 		if (suggestion3.type !== 'stretching' || suggestion3.id !== 14) {
-			console.log(`  Expected: stretching/14, Got: ${suggestion3.type}/${suggestion3.id}`);
+			console.log(`	Expected: stretching/14, Got: ${suggestion3.type}/${suggestion3.id}`);
 			return false;
 		}
 
 		return true;
 	});
 
-	// test('statisticsCalculation', () => {
-	//   const stats = statisticsService.getStatistics();
+	test('statisticsCalculation', () => {
+		dataService.saveHistory(activityHistory);
+		const stats = statisticsService.getCurrentStatistics(new Date('2026-02-15'));
 
-	//   // Check structure
-	//   if (!stats.weekly || !stats.monthly || !stats.yearly || typeof stats.streak !== 'number') {
-	//     return false;
-	//   }
+		// Check structure
+		if (!stats.week || !stats.month || !stats.year || typeof stats.streak !== 'number') {
+			return false;
+		}
 
-	//   // Should have current month in monthly stats
-	//   const currentMonth = new Date().getFullYear() + '-' +
-	//     String(new Date().getMonth() + 1).padStart(2, '0');
+		if (stats.week.total !== 2) {
+			console.log(`	Expected: week total /2, Got: ${stats.week.total}`);
+			return false;
+		}
 
-	//   if (!(currentMonth in stats.monthly)) {
-	//     return false;
-	//   }
+		if (stats.month.total !== 3) {
+			console.log(`	Expected: month total /3, Got: ${stats.month.total}`);
+			return false;
+		}
 
-	//   // Check current month has today
-	//   const currentMonthData = stats.monthly[currentMonth];
-	//   if (currentMonthData.total < 1 || currentMonthData.total > 31) {
-	//     return false; // Unrealistic number
-	//   }
+		if (stats.year.total !== 4) {
+			console.log(`	Expected: year total /4, Got: ${stats.year.total}`);
+			return false;
+		}
 
-	//   return true;
-	// });
+		if (stats.streak !== 0) {
+			console.log(`	Expected: streak /0, Got: ${stats.streak}`);
+			return false;
+		}
+
+		return true;
+	});
 
 	console.log(`\n=== Test Results ===`);
 	console.log(`Passed: ${testsPassed}`);

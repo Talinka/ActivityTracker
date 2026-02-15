@@ -1,10 +1,10 @@
 import { Request, Response } from 'express';
 import { statisticsService } from '../services/statistics-service';
-import { ApiResponse } from '../models/types';
+import { ApiResponse } from 'models/api';
 
-export const getStatistics = async (req: Request, res: Response): Promise<void> => {
+export const getCurrentStatistics = async (req: Request, res: Response): Promise<void> => {
   try {
-    const statistics = statisticsService.getStatistics();
+    const statistics = statisticsService.getCurrentStatistics();
     const response: ApiResponse<any> = {
       success: true,
       data: statistics

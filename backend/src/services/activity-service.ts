@@ -1,4 +1,4 @@
-import { ActivityDefinition, FinishedActivity, ActivitySuggestion } from '../models/types';
+import { ActivityDefinition, FinishedActivity, ActivitySuggestion } from 'models/activities';
 import { dataService } from './data.service';
 
 export class ActivityService {
@@ -12,7 +12,6 @@ export class ActivityService {
   private loadData(): void {
     this.activities = dataService.loadActivities();
     this.history = dataService.loadHistory();
-		console.log("Load", this.history);
   }
 
   public reloadData(): void {
@@ -35,7 +34,6 @@ export class ActivityService {
     // Move to next type (circular)
     const currentTypeIndex = (lastActivityTypeIndex + 1) % this.activities.length;
     const currentType = this.activities[currentTypeIndex];
-    console.log(this.history, lastActivity, lastActivityTypeIndex, currentTypeIndex, currentType);
 
     // Find next ID for this type
     const lastIdForType = this.history
@@ -49,7 +47,7 @@ export class ActivityService {
 
     const nextIndex = (currentIndex + 1) % currentType.ids.length;
     const nextId = currentType.ids[nextIndex];
-    console.log(lastIdForType, currentIndex, nextId);
+
     return {
       type: currentType.type,
       id: nextId,

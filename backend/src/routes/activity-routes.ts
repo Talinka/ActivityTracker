@@ -4,7 +4,7 @@ import {
   getSuggestion,
   getHistory,
   markDone,
-	cancelLast
+  cancelLast
 } from '../controllers/activity-controller';
 
 const router = Router();

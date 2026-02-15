@@ -1,9 +1,9 @@
 import { Router } from 'express';
-import { getStatistics } from '../controllers/statistics-controller';
+import { getCurrentStatistics } from '../controllers/statistics-controller';
 
 const router = Router();
 
-// Get statistics (weekly, monthly, yearly, streak)
-router.get('/statistics', getStatistics);
+// Get current statistics (week, month, year, streak)
+router.get('/current-statistics', getCurrentStatistics);
 
 export default router;

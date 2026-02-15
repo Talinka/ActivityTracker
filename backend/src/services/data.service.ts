@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import { ActivityDefinition, FinishedActivity } from '../models/types';
+import { ActivityDefinition, FinishedActivity } from 'models/activities';
 import { env } from 'process';
 
 export class DataService {
@@ -47,10 +47,8 @@ export class DataService {
   }
 
   loadHistory(): FinishedActivity[] {
-		
     try {
       const data = fs.readFileSync(this.historyFile, 'utf8');
-			console.log("loadHistory", data);
       return JSON.parse(data);
     } catch (error) {
       console.error('Error loading history:', error);
@@ -68,7 +66,6 @@ export class DataService {
   }
 
   saveHistory(history: FinishedActivity[]): void {
-		console.log("Save history", history);
     try {
       fs.writeFileSync(this.historyFile, JSON.stringify(history, null, 2));
     } catch (error) {
