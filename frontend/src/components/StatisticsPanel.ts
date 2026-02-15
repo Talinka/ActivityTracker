@@ -1,6 +1,6 @@
 import { html, css, LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { Statistics } from '../types';
+import { CurrentStatistics } from 'models/statistics';
 
 @customElement('statistics-panel')
 export class StatisticsPanel extends LitElement {
@@ -75,7 +75,7 @@ export class StatisticsPanel extends LitElement {
   `;
 
   @property({ type: Object })
-  statistics!: Statistics | null;
+  statistics!: CurrentStatistics | null;
 
   render() {
     if (!this.statistics) {
@@ -110,21 +110,15 @@ export class StatisticsPanel extends LitElement {
   }
 
   private getWeeklyTotal(): number {
-    return Object.values(this.statistics!.weekly).reduce((sum, count) => sum + count, 0);
+    return this.statistics!.week.total;
   }
 
   private getMonthlyTotal(): number {
-    const currentMonth = new Date().getFullYear() + '-' +
-      String(new Date().getMonth() + 1).padStart(2, '0');
-
-    const monthData = this.statistics!.monthly[currentMonth];
-    return monthData ? monthData.total : 0;
+    return this.statistics!.month.total;
   }
 
   private getYearlyTotal(): number {
-    const currentYear = new Date().getFullYear().toString();
-    const yearData = this.statistics!.yearly[currentYear];
-    return yearData ? yearData.total : 0;
+    return this.statistics!.year.total;
   }
 }
 

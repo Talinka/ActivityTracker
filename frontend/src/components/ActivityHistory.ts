@@ -1,6 +1,6 @@
 import { html, css, LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { FinishedActivity, ActivityDefinition } from '../types';
+import { FinishedActivity, ActivityDefinition } from 'models/activities';
 import { classMap } from 'lit/directives/class-map.js';
 
 @customElement('activity-history')

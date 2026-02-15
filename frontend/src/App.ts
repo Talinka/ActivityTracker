@@ -1,6 +1,7 @@
 import { html, css, LitElement } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
-import { ActivitySuggestion, Statistics, FinishedActivity, ActivityDefinition } from './types';
+import { ActivitySuggestion, FinishedActivity, ActivityDefinition } from 'models/activities';
+import { CurrentStatistics } from 'models/statistics';
 import { apiService } from './services/api';
 import './components/DashboardPage';
 
@@ -49,7 +50,7 @@ export class App extends LitElement {
 	private currentSuggestion: ActivitySuggestion | null = null;
 
 	@state()
-	private statistics: Statistics | null = null;
+	private statistics: CurrentStatistics | null = null;
 
 	@state()
 	private history: FinishedActivity[] = [];

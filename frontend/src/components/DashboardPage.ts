@@ -1,6 +1,7 @@
 import { html, css, LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { ActivitySuggestion, Statistics, FinishedActivity, ActivityDefinition } from '../types';
+import { ActivitySuggestion, FinishedActivity, ActivityDefinition } from 'models/activities';
+import { CurrentStatistics } from 'models/statistics';
 import './ActivityTracker';
 import './StatisticsPanel';
 import './ActivityHistory';
@@ -40,7 +41,7 @@ export class DashboardPage extends LitElement {
 	currentSuggestion!: ActivitySuggestion | null;
 
 	@property({ type: Object })
-	statistics!: Statistics | null;
+	statistics!: CurrentStatistics | null;
 
 	@property({ type: Array })
 	history!: FinishedActivity[];

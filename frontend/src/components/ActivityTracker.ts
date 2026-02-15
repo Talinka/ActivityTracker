@@ -1,6 +1,6 @@
 import { html, css, LitElement } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import { ActivitySuggestion, ActivityDefinition } from '../types';
+import { ActivitySuggestion, ActivityDefinition } from 'models/activities';
 
 @customElement('activity-tracker')
 export class ActivityTracker extends LitElement {
