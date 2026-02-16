@@ -1,4 +1,4 @@
-import { ActivityId, ActivityType } from 'models/activities';
+import { ActivityId, ActivityType } from './activities';
 
 // API Response wrapper
 export interface ApiResponse<T> {

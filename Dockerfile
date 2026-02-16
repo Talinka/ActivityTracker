@@ -6,6 +6,7 @@ WORKDIR /app
 
 ADD backend /app/backend
 ADD frontend /app/frontend
+ADD models /app/models
 
 RUN (cd frontend; npm i)
 RUN (cd backend; npm i)
