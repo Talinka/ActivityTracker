@@ -9,9 +9,18 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Middleware
-app.use(helmet({ contentSecurityPolicy: false }));
+//app.use(helmet({ contentSecurityPolicy: false }));
 app.use(cors());
 app.use(express.json());
+
+// Health check endpoint
+app.get('/api/health', (req, res) => {
+  res.json({ success: true, message: 'API is healthy' });
+});
+
+// API routes
+app.use('/api', activityRoutes);
+app.use('/api', statisticsRoutes);
 
 // Serve static files from frontend build in production
 if (process.env.NODE_ENV === 'production') {
@@ -22,15 +31,6 @@ if (process.env.NODE_ENV === 'production') {
     res.sendFile(path.join(staticPath, 'index.html'));
   });
 }
-
-// Health check endpoint
-app.get('/api/health', (req, res) => {
-  res.json({ success: true, message: 'API is healthy' });
-});
-
-// API routes
-app.use('/api', activityRoutes);
-app.use('/api', statisticsRoutes);
 
 // Error handling middleware
 app.use((error: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
