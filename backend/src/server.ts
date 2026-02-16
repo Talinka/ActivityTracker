@@ -16,8 +16,11 @@ app.use(express.json());
 // Serve static files from frontend build in production
 if (process.env.NODE_ENV === 'production') {
   const staticPath = path.join(__dirname, 'wwwroot');
-  console.log('Serving static files from:', staticPath);
   app.use(express.static(staticPath));
+
+  app.get('/{*splat}', (req, res) => {
+    res.sendFile(path.join(staticPath, 'index.html'));
+  });
 }
 
 // Health check endpoint
