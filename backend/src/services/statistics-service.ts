@@ -71,7 +71,7 @@ export class StatisticsService {
     let streakBroken = false;
 
     // Check up to 365 days for streak
-    for (let i = 0; i < 365 && !streakBroken; i++) {
+    for (let i = 1; i < 365 && !streakBroken; i++) {
       const checkDate = new Date(now);
       checkDate.setDate(now.getDate() - i);
       const checkDateStr = this.convertDateToInnerFormat(checkDate);

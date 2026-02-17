@@ -150,10 +150,17 @@ function runTests(): void {
 		activityService.reloadData();
 		statisticsService.reloadData();
 
-		const stats = statisticsService.getCurrentStatistics(new Date('2026-02-10'));
+		const stats1 = statisticsService.getCurrentStatistics(new Date('2026-02-10'));
 
-		if (stats.streak !== 4) {
-			console.log(`	Expected: streak /4, Got: ${stats.streak}`);
+		if (stats1.streak !== 3) {
+			console.log(`	Expected: streak /3, Got: ${stats1.streak}`);
+			return false;
+		}
+
+		const stats2 = statisticsService.getCurrentStatistics(new Date('2026-02-11'));
+
+		if (stats2.streak !== 4) {
+			console.log(`	Expected: streak /4, Got: ${stats2.streak}`);
 			return false;
 		}
 
