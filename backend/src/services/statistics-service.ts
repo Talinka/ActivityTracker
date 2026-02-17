@@ -12,6 +12,10 @@ export class StatisticsService {
     this.history = dataService.loadHistory();
   }
 
+  public reloadData(): void {
+    this.loadData();
+  }
+
   private convertDateToInnerFormat(date: Date): string {
     return date.toISOString().split('T')[0];
   }
@@ -62,26 +66,26 @@ export class StatisticsService {
 
     // Calculate current streak
     let streak = 0;
-    let currentDate = new Date();
-    let consecutiveDays = 0;
+    let consecutiveDays = 1;
+    let activitiesCount = 0;
     let streakBroken = false;
 
     // Check up to 365 days for streak
     for (let i = 0; i < 365 && !streakBroken; i++) {
-      const checkDate = new Date(currentDate);
-      checkDate.setDate(currentDate.getDate() - i);
+      const checkDate = new Date(now);
+      checkDate.setDate(now.getDate() - i);
       const checkDateStr = this.convertDateToInnerFormat(checkDate);
 
       const activitiesOnDate = this.history.filter(h => h.date === checkDateStr);
-
-      if (activitiesOnDate.length > 0) {
+      activitiesCount += activitiesOnDate.length;
+      if (activitiesCount >= consecutiveDays) {
         consecutiveDays++;
       } else {
         streakBroken = true;
       }
     }
 
-    streak = consecutiveDays;
+    streak = consecutiveDays - 1;
 
     return {
       week,

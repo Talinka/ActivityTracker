@@ -7,7 +7,8 @@ env.EXERCIZE_TRACKER_DATA_DIR = dataDir;
 import { dataService } from '../services/data.service';
 import { activityService } from '../services/activity-service';
 import { statisticsService } from '../services/statistics-service';
-import { activityHistory } from './fixtures/activityHistory';
+import { activityHistory1 } from './fixtures/activityHistory1';
+import { activityHistory2 } from './fixtures/activityHistory2';
 
 function runTests(): void {
 	let testsPassed = 0;
@@ -111,7 +112,9 @@ function runTests(): void {
 	});
 
 	test('statisticsCalculation', () => {
-		dataService.saveHistory(activityHistory);
+		dataService.saveHistory(activityHistory1);
+		activityService.reloadData();
+		statisticsService.reloadData();
 		const stats = statisticsService.getCurrentStatistics(new Date('2026-02-15'));
 
 		// Check structure
@@ -136,6 +139,21 @@ function runTests(): void {
 
 		if (stats.streak !== 0) {
 			console.log(`	Expected: streak /0, Got: ${stats.streak}`);
+			return false;
+		}
+
+		return true;
+	});
+
+		test('streakCalculation', () => {
+		dataService.saveHistory(activityHistory2);
+		activityService.reloadData();
+		statisticsService.reloadData();
+
+		const stats = statisticsService.getCurrentStatistics(new Date('2026-02-10'));
+
+		if (stats.streak !== 4) {
+			console.log(`	Expected: streak /4, Got: ${stats.streak}`);
 			return false;
 		}
 
