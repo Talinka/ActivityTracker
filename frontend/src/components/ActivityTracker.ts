@@ -139,14 +139,14 @@ export class ActivityTracker extends LitElement {
       background: #047857;
     }
 
-		.btn-danger {
-			background: #c70036;
-			color: white;
-		}
+    .btn-danger {
+      background: #c70036;
+      color: white;
+    }
 
-		.btn-danger:hover {
-			background: #a50036;
-		}
+    .btn-danger:hover {
+      background: #a50036;
+    }
 
     @media (max-width: 640px) {
       padding: 1.5rem;

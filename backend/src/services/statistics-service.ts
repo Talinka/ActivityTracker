@@ -65,7 +65,6 @@ export class StatisticsService {
     const uniqueTrainingDates = new Set(thisYearActivities.map(h => h.date));
 
     // Calculate current streak
-    let streak = 0;
     let consecutiveDays = 1;
     let activitiesCount = 0;
     let streakBroken = false;
@@ -85,7 +84,7 @@ export class StatisticsService {
       }
     }
 
-    streak = consecutiveDays - 1;
+    const streak = consecutiveDays - 1;
 
     return {
       week,

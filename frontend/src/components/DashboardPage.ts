@@ -8,7 +8,7 @@ import './ActivityHistory';
 
 @customElement('dashboard-page')
 export class DashboardPage extends LitElement {
-	static styles = css`
+  static styles = css`
     :host {
       display: block;
       font-family: inherit;
@@ -37,27 +37,27 @@ export class DashboardPage extends LitElement {
     }
   `;
 
-	@property({ type: Object })
-	currentSuggestion!: ActivitySuggestion | null;
+  @property({ type: Object })
+  currentSuggestion!: ActivitySuggestion | null;
 
-	@property({ type: Object })
-	statistics!: CurrentStatistics | null;
+  @property({ type: Object })
+  statistics!: CurrentStatistics | null;
 
-	@property({ type: Array })
-	history!: FinishedActivity[];
+  @property({ type: Array })
+  history!: FinishedActivity[];
 
-	@property({ type: Array })
-	activities!: ActivityDefinition[];
+  @property({ type: Array })
+  activities!: ActivityDefinition[];
 
-	render() {
-		return html`
+  render() {
+    return html`
       <div class="dashboard-grid">
         <activity-tracker
           class="full-width"
           .selectedActivity=${this.currentSuggestion}
           .activities=${this.activities}
           @mark-done=${(e: CustomEvent) => this.dispatchEvent(new CustomEvent('mark-done', { detail: e.detail }))}
-					@cancel-last=${() => this.dispatchEvent(new Event('cancel-last'))}
+          @cancel-last=${() => this.dispatchEvent(new Event('cancel-last'))}
         ></activity-tracker>
 
         <statistics-panel
@@ -70,11 +70,11 @@ export class DashboardPage extends LitElement {
         ></activity-history>
       </div>
     `;
-	}
+  }
 }
 
 declare global {
-	interface HTMLElementTagNameMap {
-		'dashboard-page': DashboardPage;
-	}
+  interface HTMLElementTagNameMap {
+    'dashboard-page': DashboardPage;
+  }
 }

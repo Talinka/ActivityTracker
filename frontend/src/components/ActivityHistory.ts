@@ -48,9 +48,9 @@ export class ActivityHistory extends LitElement {
       border: 1px solid #e5e7eb;
     }
 
-		.history-canceled-item {
-			background: #e2e2e2;
-		}
+    .history-canceled-item {
+      background: #e2e2e2;
+    }
 
     .activity-info {
       display: flex;
@@ -64,9 +64,9 @@ export class ActivityHistory extends LitElement {
       font-size: 0.875rem;
     }
 
-		.history-canceled-item .activity-type {
-			text-decoration: line-through;
-		}
+    .history-canceled-item .activity-type {
+      text-decoration: line-through;
+    }
 
     .activity-details {
       color: #6b7280;
@@ -79,9 +79,9 @@ export class ActivityHistory extends LitElement {
       font-size: 0.875rem;
     }
 
-		.history-canceled-item .activity-date {
-			color: #d92f3f;
-		}
+    .history-canceled-item .activity-date {
+      color: #d92f3f;
+    }
 
     .empty-state {
       text-align: center;
@@ -114,10 +114,10 @@ export class ActivityHistory extends LitElement {
   @property({ type: Array })
   activities!: ActivityDefinition[];
 
-	getActivityClasses = (activity: FinishedActivity) => ({
-		'history-item': true,
-		'history-canceled-item': Boolean(activity.canceled),
-	});
+  getActivityClasses = (activity: FinishedActivity) => ({
+    'history-item': true,
+    'history-canceled-item': Boolean(activity.canceled),
+  });
 
   render() {
     return html`
