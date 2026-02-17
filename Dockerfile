@@ -4,15 +4,24 @@ FROM node:20-alpine AS builder
 RUN mkdir /app
 WORKDIR /app
 
+# Install packages first:
+RUN mkdir -p /app/backend
+ADD backend/package.json /app/backend/package.json
+RUN (cd backend; npm i)
+
+RUN mkdir -p /app/frontend
+ADD frontend/package.json /app/frontend/package.json
+RUN (cd frontend; npm i)
+
+# Now copy sources and build apps
 ADD backend /app/backend
 ADD frontend /app/frontend
 ADD models /app/models
 
-RUN (cd frontend; npm i)
-RUN (cd backend; npm i)
 RUN (cd frontend; npm run build)
 RUN (cd backend; npm run build)
 
+# The main image:
 FROM node:20-alpine
 
 # Install curl for health checks
@@ -30,7 +39,6 @@ COPY --from=builder /app/backend/dist ./backend/dist
 COPY --from=builder /app/backend/node_modules ./backend/node_modules
 
 # Copy default data files
-COPY data/ /default_data
 COPY run.sh /app/run.sh
 
 # Create non-root user
