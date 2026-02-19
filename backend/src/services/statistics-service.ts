@@ -32,6 +32,7 @@ export class StatisticsService {
   }
 
   getCurrentStatistics(now = new Date()): CurrentStatistics {
+    this.loadData();
     // Current week statistics
     const thisWeekActivities: FinishedActivity[] = [];
     const dayNumber = (now.getDay() + 6) % 7;
@@ -62,7 +63,6 @@ export class StatisticsService {
     );
 
     const year = this.getExercisesStatistics(thisYearActivities);
-    const uniqueTrainingDates = new Set(thisYearActivities.map(h => h.date));
 
     // Calculate current streak
     let consecutiveDays = 1;
