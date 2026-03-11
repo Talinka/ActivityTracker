@@ -7,11 +7,13 @@ export class ActivityTracker extends LitElement {
   static styles = css`
     :host {
       display: block;
-      background: white;
+      background: linear-gradient(135deg, #fef6ef 0%, #f8fbff 50%, #eef4ff 100%);
       border-radius: 0.75rem;
       padding: 2rem;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-      border: 2px solid #e5e7eb;
+      box-shadow: 0 15px 35px -20px rgba(23, 23, 23, 0.45);
+      border: 2px solid rgba(255, 255, 255, 0.6);
+      background-clip: padding-box;
+      backdrop-filter: blur(16px);
     }
 
     .header {
@@ -38,11 +40,13 @@ export class ActivityTracker extends LitElement {
     }
 
     .activity-display {
-      background: #f9fafb;
+      background: rgba(255, 255, 255, 0.65);
+      backdrop-filter: blur(12px);
       border-radius: 0.5rem;
       padding: 1.5rem;
       margin-bottom: 1.5rem;
       text-align: center;
+      border: 1px solid rgba(226, 231, 255, 0.65);
     }
 
     .activity-type {
