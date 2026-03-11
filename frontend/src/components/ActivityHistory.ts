@@ -11,31 +11,32 @@ export class ActivityHistory extends LitElement {
     }
 
     .history-container {
-      background: white;
+      background: linear-gradient(135deg, #fef6ef 0%, #f8fbff 50%, #eef4ff 100%);
       border-radius: 0.75rem;
       padding: 2rem;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-      border: 2px solid #e5e7eb;
-      max-height: 400px;
-      overflow-y: auto;
+      box-shadow: 0 15px 35px -20px rgba(23, 23, 23, 0.45);
+      border: 2px solid rgba(255, 255, 255, 0.6);
+      background-clip: padding-box;
+      display: flex;
+      flex-direction: column;
     }
 
     h3 {
-      margin: 0 0 1.5rem 0;
+      margin: 0 0 1.25rem 0;
       font-size: 1.25rem;
       font-weight: 600;
       color: #1f2937;
-      position: sticky;
-      top: 0;
-      background: white;
-      padding-bottom: 1rem;
-      border-bottom: 1px solid #e5e7eb;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid rgba(226, 231, 255, 0.75);
     }
 
     .history-list {
       display: flex;
       flex-direction: column;
       gap: 0.75rem;
+      max-height: 350px;
+      overflow-y: auto;
+      padding-right: 0.25rem;
     }
 
     .history-item {
@@ -43,9 +44,10 @@ export class ActivityHistory extends LitElement {
       justify-content: space-between;
       align-items: center;
       padding: 1rem;
-      background: #f9fafb;
+      background: rgba(255, 255, 255, 0.65);
+      backdrop-filter: blur(12px);
       border-radius: 0.5rem;
-      border: 1px solid #e5e7eb;
+      border: 1px solid rgba(226, 231, 255, 0.55);
     }
 
     .history-canceled-item {
